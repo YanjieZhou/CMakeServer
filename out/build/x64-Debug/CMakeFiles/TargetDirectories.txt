@@ -1,0 +1,5 @@
+C:/Users/81586/source/repos/CMakeServer/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/81586/source/repos/CMakeServer/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/81586/source/repos/CMakeServer/out/build/x64-Debug/CMakeServer/CMakeFiles/CMakeServer.dir
+C:/Users/81586/source/repos/CMakeServer/out/build/x64-Debug/CMakeServer/CMakeFiles/edit_cache.dir
+C:/Users/81586/source/repos/CMakeServer/out/build/x64-Debug/CMakeServer/CMakeFiles/rebuild_cache.dir

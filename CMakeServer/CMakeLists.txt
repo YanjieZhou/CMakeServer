@@ -4,6 +4,6 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Add source to this project's executable.
-add_executable (CMakeServer "CMakeServer.cpp" "CMakeServer.h" "lock/locker.h")
+add_executable (CMakeServer "CMakeServer.cpp" "CMakeServer.h" "lock/locker.h" "Mysql/connection.h" "Mysql/connection.cpp")
 
 # TODO: Add tests and install targets if needed.

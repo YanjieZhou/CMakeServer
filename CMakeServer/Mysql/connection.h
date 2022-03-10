@@ -5,6 +5,7 @@
 #include <mysql/mysql.h>
 #include <mutex>
 #include <list>
+#include <condition_variable>
 
 class MysqlConnection
 {
@@ -16,17 +17,18 @@ public:
 	std::string dbName_;
 	int closeLog_;
 
-	MysqlConnection(std::string url, std::string username, std::string password, int port, std::string dbName, int maxConn, int closeLog);
+	void init(std::string url, std::string username, std::string password, int port, std::string dbName, int maxConn, int closeLog);
 	MYSQL* getConnection();
-	static MysqlConnection& getInstance(std::string url, std::string user, std::string password, int port, std::string dbName, int maxConn, int closeLog);
-	void destroy();
+	bool releaseConnection(MYSQL* conn);
+
 private:
-	
 	~MysqlConnection();
+
 	int maxConn_;
 	int curConn_;
 	int freeConn_;
 	std::mutex mutex_;
+	std::condition_variable cond_;
 	std::list<MYSQL*> connList_;
 };
 

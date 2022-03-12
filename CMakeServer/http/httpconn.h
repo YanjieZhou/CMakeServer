@@ -33,10 +33,9 @@ public:
         INTERNAL_ERROR,
         CLOSED_CONNECTION
     };
-public:
-    HttpConnection() {}
-    ~HttpConnection() {}
 
+
+public:
     void closeConn();
     void process();
     bool read();
@@ -45,6 +44,9 @@ public:
     sockaddr_in* address() {
         return &address_;
     }
+
+    HttpConnection(int sockfd, const sockaddr_in& addr, char* root, bool et, int closeLog, std::string user, std::string passwd, std::string sqlname);
+    ~HttpConnection() {}
 
 private:
     int sockfd_;
@@ -58,6 +60,8 @@ private:
     char* url_;
     char* version_;
     char* host_;
+    int userCount_;
+    int epollfd_;
     int contentLength_;
     char* fileAddress;
     struct stat fileStat_;
@@ -67,5 +71,14 @@ private:
     int bytesToSend_;
     int bytesSent_;
     char* docRoot_;
+    bool et_;
+    int closeLog_;
+    bool longConn_;
+    int startLine_;
+    int state_;
+
+    char sqlUser_[100];
+    char sqlPasswd_[100];
+    char sqlName_[100];
 };
 #endif // !SERVER_HTTP_H

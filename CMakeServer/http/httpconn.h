@@ -33,10 +33,18 @@ public:
         INTERNAL_ERROR,
         CLOSED_CONNECTION
     };
+    enum class LineStatus
+    {
+        OK = 0,
+        BAD,
+        OPEN
+    };
 
 
 public:
     void closeConn();
+    Code processRead();
+    bool processWrite(Code res);
     void process();
     bool read();
     bool write();
@@ -49,12 +57,19 @@ public:
     ~HttpConnection() {}
 
 private:
+    Code parseRequestLine(char* text);
+    Code parseHeader(char* text);
+    Code parseContent(char* text);
+    LineStatus parseLine();
+
     int sockfd_;
     sockaddr_in address_;
     char readBuf_[READ_BUFFER_SIZE];
     int readIdx_;
     char writeBuf_[WRITE_BUFFER_SIZE];
     int writeIdx_;
+    int checkedIdx_;
+    int checkState_;
     Method method_;
     char file_[FILENAME_LEN];
     char* url_;
